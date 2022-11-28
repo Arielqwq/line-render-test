@@ -7,7 +7,8 @@ export default async (event) => {
   try {
     // 查捷運站
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes')
-    const cafes = data.filter(cafe => cafe.mrt === event.message.text)
+    const cafes = data.filter(cafe => cafe.mrt === event.message.text.substr(4))
+    console.log(cafes)
     const bubbles = []
     for (const cafe of cafes) {
       // console.log(cafe)
