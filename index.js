@@ -37,7 +37,16 @@ bot.on('message', event => {
     } else if (event.message.type === 'location') {
       // 查location-----------------------
       // 查捷運-----------------------------
-    } else {
+    } else if (event.message.text === '怎麼查捷運？') {
+      event.reply(`依捷運名：「查捷運 ｘｘｘ 」。
+例：查捷運 南港展覽館`)
+    } else if (event.message.text === '怎麼查店名？') {
+      event.reply(`依店家名：「查店名 ｘｘｘ」。
+例：查店名 好咖啡`)
+    } else if (event.message.text === '怎麼查位置？') {
+      event.reply(`依距離：分享位置資訊給機器人。
+動動您的手指，請至左下角新增點選，分享您目前的位置。`)
+    } else if (event.message.text.startsWith('查捷運 ')) {
       fetchCafe(event)
     } // 查捷運-----------------------------
   }
