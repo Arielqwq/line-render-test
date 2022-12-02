@@ -38,7 +38,7 @@ export default async (event) => {
         contents: bubbles
       }
     }
-    event.reply(reply)
+    await event.reply(reply)
     writejson(reply, 'cafes')
   } catch (error) {
     console.log(error)
