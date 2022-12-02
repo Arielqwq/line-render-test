@@ -7,10 +7,22 @@ export default async (event) => {
   try {
     // 查捷運站
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes')
-    const cafes = data.filter(cafe =>
-      cafe.mrt === event.message.text.substr(4)
-    )
+
+    const cafes = []
+    for (let i = 0; i <= data.length; i++) {
+      if (!data[i]?.mrt && data[i]?.mrt === '') continue
+      if (data[i]?.mrt === event.message.text.substr(4)) {
+        cafes.push(data[i])
+      }
+    }
+
     // console.log(cafes)
+    // const cafes = data1.filter(cafe =>
+    //   cafe.mrt === event.message.text.substr(4)
+    // )
+
+    // console.log(cafes)
+
     const bubbles = []
     for (const cafe of cafes) {
       // console.log(cafe)
@@ -32,6 +44,9 @@ export default async (event) => {
       // 查捷運站
     }
     // console.log(bubbles)
+    if (cafes.length === 0) {
+      event.reply('找不到資料')
+    }
     const reply = {
       type: 'flex',
       altText: '咖啡店_捷運站名查詢結果',
@@ -40,11 +55,10 @@ export default async (event) => {
         contents: bubbles
       }
     }
-    await event.reply(reply)
+    event.reply(reply)
     writejson(reply, 'cafes')
   } catch (error) {
     console.log(error)
     event.reply('目前未找到資料，請稍候再試')
   }
-  // }
 }
