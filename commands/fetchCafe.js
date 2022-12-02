@@ -6,10 +6,9 @@ export default async (event) => {
   // if (event.message.type === 'text') {
   try {
     // 查捷運站
-    const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes')
+    const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes/taipei')
     const cafes = []
-
-    for (let i = 0; i <= 7; i++) {
+    for (let i = 0; i <= 4; i++) {
       for (let j = i * 500; j <= (i + 1) * 500; j++) {
         if (!data[j]?.mrt && data[j]?.mrt === '') continue
         if (j > data.length) continue
