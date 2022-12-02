@@ -9,7 +9,7 @@ export default async (event) => {
     // 查店名
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes')
     // console.log('aaa' + event.message.text.substr(4))
-    // console.log('data' + data)
+    console.log('data' + data)
     const cafes = data.filter(cafe => cafe.name.includes(event.message.text.substr(4)))
     console.log(cafes)
 
