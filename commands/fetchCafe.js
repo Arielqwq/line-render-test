@@ -7,16 +7,22 @@ export default async (event) => {
   try {
     // 查捷運站
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes')
-
+    const forNumber = Math.round(data.length / 500)
     const cafes = []
-    for (let i = 0; i <= data.length; i++) {
-      if (!data[i]?.mrt && data[i]?.mrt === '') continue
-      if (data[i]?.mrt === event.message.text.substr(4)) {
-        cafes.push(data[i])
+
+    for (let i = 0; i <= forNumber; i++) {
+      for (let j = i * 500; j <= (i + 1) * 500; j++) {
+        console.log(i, j)
+        if (!data[j]?.mrt && data[j]?.mrt === '') continue
+        if (j > data.length) continue
+
+        if (data[j]?.mrt === event.message.text.substr(4)) {
+          cafes.push(data[j])
+        }
       }
     }
 
-    // console.log(cafes)
+    console.log(cafes)
     // const cafes = data1.filter(cafe =>
     //   cafe.mrt === event.message.text.substr(4)
     // )
