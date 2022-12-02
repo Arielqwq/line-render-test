@@ -8,7 +8,7 @@ export default async (event) => {
     // 查捷運站
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes/taipei')
     const cafes = []
-    console.log(event.message.text.substr(4))
+    // console.log(event.message.text.substr(4))
     for (let i = 0; i <= 4; i++) {
       for (let j = i * 500; j <= (i + 1) * 500; j++) {
         if (j > data.length) break
