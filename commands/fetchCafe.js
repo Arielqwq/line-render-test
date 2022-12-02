@@ -8,20 +8,28 @@ export default async (event) => {
     // 查捷運站
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes')
     const cafes = []
+    // const cafesTemp = []
 
-    for (let i = 0; i <= 7; i++) {
-      for (let j = i * 500; j <= (i + 1) * 500; j++) {
-        console.log(i, j)
-        if (!data[j]?.mrt && data[j]?.mrt === '') continue
-        if (j > data.length) continue
+    // for (let i = 0; i <= 7; i++) {
+    //   for (let j = i * 500; j <= (i + 1) * 500; j++) {
+    //     if (!data[j]?.mrt && data[j]?.mrt === '') continue
+    //     if (j > data.length) continue
 
-        if (data[j]?.mrt === event.message.text.substr(4)) {
-          cafes.push(data[j])
-        }
+    //     if (data[j]?.mrt === event.message.text.substr(4)) {
+    //       cafes.push(data[j])
+    //     }
+    //   }
+    // }
+    if (data) {
+      const temp = data.filter(cafe =>
+        cafe.mrt === event.message.text.substr(4)
+      )
+      if (temp) {
+        cafes.push([...temp])
       }
     }
-
     console.log(cafes)
+    // console.log(cafes)
     // const cafes = data1.filter(cafe =>
     //   cafe.mrt === event.message.text.substr(4)
     // )
