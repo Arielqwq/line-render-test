@@ -8,20 +8,18 @@ export default async (event) => {
     // 查捷運站
     const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes/taipei')
     const cafes = []
+    console.log(event.message.text.substr(4))
     for (let i = 0; i <= 4; i++) {
       for (let j = i * 500; j <= (i + 1) * 500; j++) {
+        if (j > data.length) break
         if (!data[j]?.mrt && data[j]?.mrt === '') continue
-        if (j > data.length) continue
-
-        if (data[j]?.mrt === event.message.text.substr(4)) {
-          console.log(data[j])
-          cafes.push(data[j])
-        }
+        if (data[j]?.mrt !== event.message.text.substr(4)) continue
+        console.log(data[j])
+        cafes.push(data[j])
       }
     }
-    console.log(cafes)
     // console.log(cafes)
-    // const cafes = data1.filter(cafe =>
+    // const cafes = data.filter(cafe =>
     //   cafe.mrt === event.message.text.substr(4)
     // )
 
