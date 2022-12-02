@@ -60,7 +60,7 @@ export default async (event) => {
       event.reply('目前尚未找到符合的資料，請換個地點再試一次')
       return
     }
-    event.reply(replies)
+    await event.reply(replies)
     if (process.env.WRITEJSON) {
       for (const i in replies) {
         writejson(replies[i], `bubbles${i}`)
