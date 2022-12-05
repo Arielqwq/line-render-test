@@ -2,20 +2,22 @@ import axios from 'axios'
 import temp from '../temp/cafe.js'
 import writejson from '../utils/writejson.js'
 
+// import 存到陣列裡的資料
+import { cafes } from '../cafe.js'
+
 export default async (event) => {
   // if (event.message.type === 'text') {
   try {
     // 查捷運站
-    const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes/taipei')
-    const cafes = []
+    // const { data } = await axios.get('https://cafenomad.tw/api/v1.2/cafes/taipei')
     // console.log(event.message.text.substr(4))
     for (let i = 0; i <= 4; i++) {
       for (let j = i * 500; j <= (i + 1) * 500; j++) {
-        if (j > data.length) break
-        if (!data[j]?.mrt && data[j]?.mrt === '') continue
-        if (data[j]?.mrt !== event.message.text.substr(4)) continue
-        console.log(data[j])
-        cafes.push(data[j])
+        if (j > cafes.length) break
+        if (!cafes[j]?.mrt && cafes[j]?.mrt === '') continue
+        if (cafes[j]?.mrt !== event.message.text.substr(4)) continue
+        console.log(cafes[j])
+        cafes.push(cafes[j])
       }
     }
     // console.log(cafes)
