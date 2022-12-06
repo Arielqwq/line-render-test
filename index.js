@@ -16,7 +16,7 @@ import express from 'express'
 
 import { updateCafes } from './cafe.js'
 import { scheduleJob } from 'node-schedule'
-scheduleJob('', updateCafes)
+scheduleJob('0 0 * * *', updateCafes)
 updateCafes()
 
 const app = express()

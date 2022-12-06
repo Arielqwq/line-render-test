@@ -4,6 +4,7 @@ import writejson from '../utils/writejson.js'
 import { cafes as data } from '../cafe.js'
 
 export default async (event) => {
+  console.log(data)
   // if (event.message.type === 'text') {
   try {
     // 查捷運站
@@ -50,6 +51,7 @@ export default async (event) => {
     if (cafes.length === 0) {
       event.reply('找不到資料')
     }
+
     const reply = {
       type: 'flex',
       altText: '咖啡店_捷運站名查詢結果',
